@@ -30,7 +30,7 @@ public class Menu
             if (input == 1)
             {
                 string prompt = _promptGenerator.GetRandomPrompt();
-                Console.WriteLine($"\nPrompt: {prompt}");
+                Console.WriteLine(prompt);
                 Console.Write("Your response: ");
                 string userEntry = Console.ReadLine();
 

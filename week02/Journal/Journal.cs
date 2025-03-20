@@ -43,21 +43,21 @@ public class Journal
 
     public void LoadFromFile(string file)
     {
-        if (File.Exists(file))  // Verifica se o arquivo existe
+        if (File.Exists(file))  // Check the file
         {
-            _entries.Clear();  // Limpa as entradas existentes
+            _entries.Clear();  // Clean the existing entries
 
-            string[] lines = File.ReadAllLines(file);  // Lê todas as linhas do arquivo
+            string[] lines = File.ReadAllLines(file); 
             foreach (string line in lines)
             {
-                string[] parts = line.Split(',');  // Separa os dados de cada entrada
+                string[] parts = line.Split(','); 
 
                 if (parts.Length == 3)
                 {
-                    // Cria uma nova entrada com os dados do arquivo
+                    
                     Entry newEntry = new Entry(parts[1], parts[2])
                     {
-                        _date = parts[0]  // Adiciona a data à entrada
+                        _date = parts[0] 
                     };
                     _entries.Add(newEntry);
                 }
