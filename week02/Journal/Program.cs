@@ -5,12 +5,17 @@ class Program
 {
     static void Main(string[] args)
     {
+        Menu menu = new Menu();
+        menu.Display();
 
-        Entry userEntry = new Entry();
 
-        userEntry = 
-        
 
-        Console.WriteLine("Hello World! This is the Journal Project.");
+        // Entry myEntry = new Entry();
+        // myEntry.Display();
+
+        // PromptGenerator generator = new PromptGenerator(); //GENERATE RANDOM SENTENCE
+        // Console.WriteLine(generator.GetRandomPrompt());
+
+        // Console.WriteLine("Hello World! This is the Journal Project.");
     }
 }

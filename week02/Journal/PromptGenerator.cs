@@ -1,47 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
 public class PromptGenerator
 {
-    // List to store the prompts
     public List<string> _prompts = new List<string>();
-
 
     public PromptGenerator()
     {
-        string fileName = "prompts.csv";
+        string filename = "prompts.csv";
 
-        using (StreamWriter outputFile = new StreamWriter(fileName))
+        if (File.Exists(filename))
         {
+            string[] lines = File.ReadAllLines(filename);
 
+            foreach (string line in lines)
+            {
+                
+                string[] parts = line.Split(",");
+
+                
+                foreach (string part in parts)
+                {
+                    string trimmedPart = part.Trim(); 
+                    if (!string.IsNullOrWhiteSpace(trimmedPart)) 
+                    {
+                        _prompts.Add(trimmedPart);
+                    }
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("File not found: " + filename);
         }
     }
-
-
-
-
 
     public string GetRandomPrompt()
     {
+        if (_prompts.Count == 0)
+            return "No phrases available.";
 
-        // this is path to the csv file
-        string filePath = "prompts.csv";
-
-        // string[] is used to creat an array of string, this line reads the file
-        string[] lines = System.IO.File.ReadAllLines(filePath);
-
-        //Iterate over each line in the CSV file
-        foreach (string line in lines)
-        {
-            // divide each line by the ,
-            string[] sentence = line.Split(',');
-            
-            foreach (string part in sentence)
-            {
-                _prompts.Add(part);
-            }
-        }
-
-
-
-
-        return "";
+        Random random = new Random();
+        return _prompts[random.Next(_prompts.Count)];
     }
 }
+

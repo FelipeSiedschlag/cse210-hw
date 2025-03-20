@@ -5,10 +5,13 @@ public class Entry
     public string _entryText;
 
 
-    public Entry()
+    public Entry(string prompt, string entryText)
     {
         _date = DateTime.Now.ToString("MM-dd-yyyy");
+        _promptText = prompt;
+        _entryText = entryText;
     }
+
 
     public void Display()
     {
