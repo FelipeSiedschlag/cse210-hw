@@ -27,7 +27,7 @@ public class Fraction
 
 
 
-    //Get and Set methods to the numerator
+    //Get and Set methods for the numerator
 
     public int GetTop()
     {
@@ -38,6 +38,8 @@ public class Fraction
     {
         _top = top;
     }
+
+    //Get and Set methods for the denominator
 
     public int GetBottom()
     {
