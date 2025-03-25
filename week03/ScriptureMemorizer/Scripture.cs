@@ -8,33 +8,44 @@ public class Scripture
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
-        _words = new List<Word>();
+        _words = text.Split(" ").Select(word => new Word(word)).ToList();
     }
 
-    public void HideRamdomWords(int numberToHide)
+    public void HideRandomWords(int numberToHide)
     {
         Random random = new Random();
-        int count = 0;
+        List<Word> visibleWords = _words.Where(w => !w.IsHidden()).ToList();
 
-        while (count < numberToHide)
+        // Ensure we don't try to hide more words than are available
+        int wordsToHide = Math.Min(numberToHide, visibleWords.Count);
+
+        for (int i = 0; i < wordsToHide; i++)
         {
-            int index = random.Next(_words.Count); // generate a random index
-            Word word = _words[index];
-            if (!word.IsHidden())
-            {
-                word.Hide();
-                count++;
-            }
+            int index = random.Next(visibleWords.Count);
+            visibleWords[index].Hide();
+            visibleWords.RemoveAt(index);
         }
     }
 
     public string GetDisplayText()
     {
-        return
+        List<string> displayedWords = new List<string>();
+        foreach (var word in _words)
+        {
+            displayedWords.Add(word.GetDisplayText());
+        }
+        return string.Join(" ", displayedWords);
     }
 
     public bool IsCompletelyHidden()
     {
-        
+        foreach (var word in _words)
+        {
+            if (!word.IsHidden())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
